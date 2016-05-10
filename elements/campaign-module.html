@@ -22,9 +22,9 @@
         }
 
         #show-desktop {
-            width: 60%;
-            min-height: 100em;
-            max-height: 250em;
+            width: 100%;
+            min-width: 40em;
+            height: auto;
             background-color: whitesmoke;
             margin: auto;
             padding-bottom: 3em;
@@ -35,11 +35,10 @@
         }
 
         .campaign-container {
-            width: 40vw;
+            width: 50vw;
             margin: 3em auto;
             background-color: white;
-            height: 55em;
-            max-height: 75em;
+            height: auto;
             text-align: center;
         }
 
@@ -49,15 +48,16 @@
         }
 
         .campaign-info h3 {
-            width: 16vw;
-            min-width: 16vw;
+            width: 10em;
+            /*min-width: 16vw;*/
             display: inline-block;
-            padding: 1em;
+            /*padding: 1em;*/
+            margin: 1em;
             letter-spacing: .2em;
         }
 
         .progress-container {
-            width: 40vw;
+            width: 50vw;
             padding: 1em;
             margin-top: -1.3em;
         }
@@ -65,7 +65,7 @@
         .progress-container paper-progress {
             display: inline-block;
             margin: auto;
-            width: 30vw;
+            width: 70%;
         }
 
         .progress-container h4 {
@@ -76,7 +76,7 @@
         }
 
         .transaction-container {
-            width: 40em;
+            width: 100%;
             margin: auto;
         }
 
@@ -92,9 +92,10 @@
 
         .transaction {
             margin: 1em auto;
-            border: 0 solid lightgray;
-            box-shadow: 0px 0px 20px 1px lightgray;
+            /*border: 0 solid lightgray;*/
+            box-shadow: 0 0 20px 1 lightgray;
             height: 7em;
+            width: 100%;
         }
 
         .profile-picture {
@@ -103,20 +104,37 @@
             border-radius: 100%;
             margin: 1em 0 0 1em;
         }
+        
+        .info-left {
+            margin-top: 1.3em;
+            margin-left: 2em;
 
-        .transaction-info {
-            width: 83%;
-            height: 40%;
-            margin: 2em 0 0 .7em;
+            text-align: right;
+            float: left;
+            white-space: nowrap;
+        }
+        .info-right {
+            margin-top: 1.3em;
             display: inline-block;
             text-align: left;
+            margin-left: 1em;
+            white-space: nowrap;
+            overflow: hidden;
         }
 
-        .transaction-info h4 {
-            display: inline-block;
-            width: 47%;
-            margin: 0 auto .3em .3em;
-            letter-spacing: .1em;
+        .transaction-info {
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        @media only screen and (min-width: 1500px) {
+            .info-left {
+                margin-top: 1.3em;
+                margin-left: 10em;
+
+                text-align: right;
+                float: left;
+                white-space: nowrap;
+            }
         }
 
         @media only screen and (max-width: 900px) {
@@ -164,6 +182,7 @@
                 text-align: center;
                 display: inline;
             }
+            
 
             .transaction-info h4 {
                 width: 28%;
@@ -196,6 +215,7 @@
                             <div class="progress-container">
                                 <paper-progress value="{{item.balance}}" max="{{item.target}}"
                                                 class="green"></paper-progress>
+                                                <br>
                                 <h4>${{item.balance}}/{{item.target}}</h4>
                                 <hr>
                             </div>
@@ -206,12 +226,16 @@
                                         <img class="profile-picture"
                                              src="https://pbs.twimg.com/profile_images/{{item.picture}}">
                                         <div class="transaction-info">
-                                            <h4><a href="https://twitter.com/{{item.username}}" target="_blank"><span
-                                                    class="blue">@{{item.username}}</span></a>
-                                            </h4>
-                                            <h4>Favorites: {{item.favorites}}</h4>
-                                            <h4>Amount: {{item.amount}}</h4>
-                                            <h4>Retweets: {{item.retweets}}</h4>
+                                            <div class="info-left">
+                                                <h4><a href="https://twitter.com/{{item.username}}" target="_blank"><span
+                                                        class="blue">@{{item.username}}</span></a>
+                                                </h4>
+                                                <h4>Favorites: {{item.favorites}}</h4>
+                                            </div>
+                                            <div class="info-right">
+                                                <h4>Amount: {{item.amount}}</h4>
+                                                <h4>Retweets: {{item.retweets}}</h4>
+                                            </div>
                                         </div>
                                     </div>
                                 </template>
