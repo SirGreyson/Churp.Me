@@ -12,17 +12,11 @@ function showCampaigns() {
     $('campaign-module').show();
 }
 
+function parseDate(date) {
+    return Date.parse(date);
+}
 
-function checkDate() {
-    var date = $('#completion-date-input').val();
-    var tag = $('#campaign-hashtag-input').val();
-    var name = $('#campaign-name-input').val();
-    var goal = $('#target-goal-input').val()
-    var data = {
-        date: date,
-        hashtag: tag,
-        title: name,
-        goal: goal
-    }
-    newCampaign(data);
+function parseTimestamp(timestamp) {
+    var date = new Date(timestamp);
+    return date.getMonth() + "/" + date.getDay() + "/" + date.getFullYear();
 }

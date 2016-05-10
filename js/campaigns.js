@@ -30,8 +30,15 @@ function getCampaigns(context) {
  * @param target - the target amount of money to raise for the campaign
  * @param title - the title of the campaign
  */
-function addCampaign(hashtag, target, title) {
-    campaigns.push().set({balance: 0, hashtag: hashtag, target: target, title: title, transactions: []});
+function addCampaign(hashtag, target, title, end) {
+    campaigns.push().set({
+        balance: 0,
+        hashtag: hashtag,
+        target: target,
+        title: title,
+        end: parseDate(end),
+        transactions: []
+    });
 }
 
 /**
@@ -40,7 +47,7 @@ function addCampaign(hashtag, target, title) {
  */
 function removeCampaign(id) {
     //TODO Make this auto-update campaign page
-    campaigns.child(id).set({});
+    campaigns.child(id.startsWith('mobile-') ? id.substr(0, 6) : id).set({});
 }
 
 /**
@@ -50,5 +57,26 @@ function removeCampaign(id) {
  * @param username - the Twitter handle of the donating user
  */
 function addTransaction(id, amount, username) {
-    campaigns.child(id + "/transactions").push().set({amount: amount, username: username, timestamp: Date.now()});
+    campaigns.child(id + "/transactions").push().set({
+        amount: amount,
+        username: username,
+        timestamp: parseDate(new Date())
+    });
+}
+
+/**
+ * Parses a campaign object into something more aesthetically pleasing
+ * @param id - the id of the campaign to parse
+ * @param campaign - the campaign object to parse
+ */
+function parseCampaign(id, campaign) {
+    campaign.dateString = parseTimestamp(campaign.end);
+    var transactions = [];
+    for (var t in campaign.transactions) {
+        var transaction = campaign.transactions[t];
+        transaction.amount = transaction.amount.toLocaleString('en', {style: 'currency', currency: 'USD'});
+        transactions.push(transaction);
+    }
+    campaign.transactions = transactions;
+    return campaign;
 }

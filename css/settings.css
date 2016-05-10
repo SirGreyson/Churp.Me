@@ -2,73 +2,77 @@
 ** FONT FAMILY IMPORTATION **
 **/
 @font-face {
-    font-family: Roboto-Thin;
-    src: url(../fonts/Roboto-Thin.ttf);
+  font-family: Roboto-Thin;
+  src: url(../fonts/Roboto-Thin.ttf);
 }
-
 @font-face {
-    font-family: Roboto-Light;
-    src: url(../fonts/Roboto-Light.ttf);
+  font-family: Roboto-Light;
+  src: url(../fonts/Roboto-Light.ttf);
 }
-
 @font-face {
-    font-family: Roboto-Medium;
-    src: url(../fonts/Roboto-Medium.ttf);
+  font-family: Roboto-Medium;
+  src: url(../fonts/Roboto-Medium.ttf);
 }
-
 @font-face {
-    font-family: Roboto-Regular;
-    src: url(../fonts/Roboto-Regular.ttf);
+  font-family: Roboto-Regular;
+  src: url(../fonts/Roboto-Regular.ttf);
 }
-
 @font-face {
-    font-family: Roboto-Bold;
-    src: url(../fonts/Roboto-Bold.ttf);
+  font-family: Roboto-Bold;
+  src: url(../fonts/Roboto-Bold.ttf);
 }
-
 /**
 ** COLOR VARIABLE IMPORTATION **
 **/
 #info-container {
-    background-color: #0277bd;
-    padding: 2em 0 4em 0;
-    color: white;
-    text-align: center;
+  background-color: #0277bd;
+  padding: 2em 0 4em 0;
+  color: white;
+  text-align: center;
 }
-
 #info-container h1 {
-    font-family: Roboto-Light;
+  font-family: Roboto-Light;
 }
-
 #info-container img {
-    width: 15em;
-    border: 4px solid white;
-    border-radius: 15em;
-    margin-top: 2em;
+  width: 15em;
+  border: 4px solid white;
+  border-radius: 15em;
+  margin-top: 2em;
 }
-
 #tab-container paper-tabs {
-    width: 60%;
-    margin: auto;
-    min-width: 25em;
+  width: 60%;
+  margin: auto;
+  min-width: 25em;
 }
-
 #tab-container paper-tabs[no-bar] paper-tab.iron-selected {
-    color: #0277bd;
+  color: #0277bd;
 }
-
 #settings-container {
-    /** STYLING FOR DESKTOP VIEW **/
+  width: 100%;
+  margin: auto;
+  font-family: Roboto-Light;
 }
 
-#settings-container #show-desktop {
-    width: 60%;
-    min-height: 100em;
-    max-height: 250em;
-    background-color: #cfd8dc;
-    margin: auto;
+#settings-container a {
+  text-decoration: none;
 }
 
-#settings-container #show-desktop paper-fab {
-    margin-right: 1em;
+#settings-container paper-toolbar {
+  background-color: #039be5;
+}
+
+#settings-container paper-toolbar .title {
+  font-family: Roboto-Regular;
+}
+
+#settings-container paper-fab {
+  margin-right: 1em;
+}
+
+#settings-container span.blue {
+  color: #039be5;
+}
+
+#settings-container .campaign-title {
+  background-color: #0277bd;
 }

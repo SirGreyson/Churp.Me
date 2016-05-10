@@ -1,9 +1,5 @@
 @import "variables.less";
 
-body {
-  //background-color: @primary-gray;
-}
-
 #info-container {
   background-color: @medium-blue;
   padding: 2em 0 4em 0;
@@ -36,17 +32,31 @@ body {
 }
 
 #settings-container {
+  width: 100%;
+  margin: auto;
+  font-family: Roboto-Light;
 
-  /** STYLING FOR DESKTOP VIEW **/
-  #show-desktop {
-    width: 60%;
-    min-height: 100em;
-    max-height: 250em;
-    background-color: @primary-gray;
-    margin: auto;
+  a {
+    text-decoration: none;
+  }
 
-    paper-fab {
-      margin-right: 1em;
+  paper-toolbar {
+    background-color: @light-blue;
+
+    .title {
+      font-family: Roboto-Regular;
     }
+  }
+
+  paper-fab {
+    margin-right: 1em;
+  }
+
+  span.blue {
+    color: @light-blue;
+  }
+
+  .campaign-title {
+    background-color: @medium-blue;
   }
 }
