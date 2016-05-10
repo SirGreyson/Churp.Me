@@ -311,6 +311,7 @@
             },
 
             ready: function () {
+                showCampaigns();
                 getCampaigns(this).then(function (success) {
                     var output = [];
                     for (var v in success.value) {

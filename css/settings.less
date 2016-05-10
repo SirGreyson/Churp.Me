@@ -32,7 +32,7 @@
 }
 
 #settings-container {
-  width: 100%;
+  width: 60%;
   margin: auto;
   font-family: Roboto-Light;
 
@@ -58,5 +58,111 @@
 
   .campaign-title {
     background-color: @medium-blue;
+  }
+}
+
+#payment-form {
+  padding: 2em;
+  margin: auto;
+  width: 100%;
+  border: 0 solid lightgray;
+  overflow: hidden;
+  text-align: center;
+  background-color: whitesmoke;
+
+  hr {
+    display: block;
+    clear: both;
+  }
+
+  paper-input {
+    letter-spacing: .2em;
+    text-align: left;
+  }
+}
+
+#payment-info {
+  padding: 2em;
+  margin: auto;
+  width: 100%;
+  border: 0 solid lightgray;
+  overflow: hidden;
+  text-align: center;
+  background-color: whitesmoke;
+
+  hr {
+    display: block;
+    clear: both;
+  }
+
+  .heading iron-icon {
+    float: left;
+    margin-right: .5em;
+  }
+
+  iron-icon {
+    float: right;
+    cursor: pointer;
+    margin-right: 1em;
+  }
+
+  p {
+    float: left;
+    clear: both;
+    letter-spacing: .25em;
+  }
+
+  .email {
+    font-family: Roboto-Bold;
+  }
+}
+
+.password-container {
+  margin-top: 3em;
+}
+
+#password-form {
+  padding: 2em;
+  margin: auto;
+  width: 100%;
+  border: 0 solid lightgray;
+  overflow: hidden;
+  background-color: whitesmoke;
+
+  hr {
+    display: block;
+    clear: both;
+  }
+}
+
+.heading {
+  float: left;
+  font-family: Roboto-Medium;
+}
+
+.submit-button {
+  width: 10%;
+  border: 1px solid black;
+  float: right;
+  color: white;
+  background-color: @dark-blue;
+  font-family: Roboto-Light;
+}
+
+@media only screen and (max-width: 900px) {
+  #settings-container paper-toolbar .title {
+    margin-left: 0;
+  }
+
+  .heading iron-icon {
+    display: none;
+  }
+
+  #payment-info {
+    padding: .5em;
+
+    iron-icon {
+      margin: .5em .5em 0 .5em;
+    }
   }
 }
