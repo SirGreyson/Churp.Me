@@ -1,149 +1,110 @@
-<link rel="imoport" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-form/iron-form.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
 <script src="../bower_components/firebase/firebase.js"></script>
 <script src="../js/payment.js"></script>
-<link rel="import" href="../bower_components/iron-collapse/iron-collapse.html">
-<link rel="import" href="../elements/add-payment-module.html">
-<link rel="import" href="../elements/campaign-module.html">
-<link rel="import" href="../elements/change-password-module.html">
 
 <dom-module id="settings-module">
 
-
     <style>
-        #form {
-            margin: auto;
-            margin-bottom: 1em;
-            width: 60%;
-            /*height: auto;*/
-            min-width: 25em;
-            border: 0 solid lightgrey;
-            overflow: hidden;
-            /*box-shadow: 0px 0px 20px 1px gray;*/
-            text-align: center;
-            background-color: rgba(991, 991, 991, 1);
-        }
-        .title {
-            text-align: left;
-        }
-        
         paper-input {
-            text-align: left;
+            --paper-input-container-color: #01579b;
         }
-        
-        iron-icon {
-            margin-right: .5em;
-            cursor: pointer;
-        }
-        
-        #spinner {
-            margin-top: 0em;
-        }
-        
-        #alert-area {
-            color: black;
-            margin-top: 0.5em;
-        }
-        
-        paper-button {
-            margin: 0.9em auto;
-            width: auto;
-            letter-spacing: 0.5em;
-            border: 1px solid black;
-            border-radius: 0;
-            cursor: default;
-        }
-        
-        .payment-settings-container {
-            background-color: #cfd8dc;
-            padding: 1em;
-        }
-        .change-password-container {
-            background-color: #cfd8dc;
-            padding: 1em;
-        }
-
-        
-        #payment-container {
-            width: 100%;
-        }
-        
-        #password-container {
-            width: 100%;
-        }
-        
-        #password {
-            letter-spacing: 0;
-        }
-        #submit-button {
-            float: left;
-        }
-        paper-toolbar {
-                --paper-toolbar-background: #039be5;
-                box-shadow: 1px 1px 10px 1px gray;
-        }
-
     </style>
 
     <template>
-
-        <form is="iron-form" id="form">
-            <!--<paper-toolbar>
-                <span class="title">Account Settings</span>
-            </paper-toolbar>-->
-        <paper-toolbar><span class="title">PAYMENT SETTINGS</span></paper-toolbar>
-         <div class="payment-settings-container">   
-            <!--<iron-icon id="more-payments"icon="expand-more" on-click="togglePayment">-->
-                <!--<paper-ripple recenters></paper-ripple>-->
-            <!--</iron-icon>-->
-            <!--<iron-collapse id="payments">-->
-                <payment-module></payment-module>
-            <!--</iron-collapse>-->
-         </div>
-         </form>
-         <form is="iron-form" id="form">
-        <paper-toolbar><span class="title">CHANGE PASSWORD</span></paper-toolbar>
-        <div class="change-password-container"> 
-            <!--<br>-->
-            <!--<iron-icon icon="expand-more" on-click="togglePassword"></iron-icon>-->
-            <!--<iron-collapse id="password">-->
-                <change-password-module></change-password-module>
-            <!--</iron-collapse>-->
+        <!-- PAYMENT SETTINGS -->
+        <div class="payment-container">
+            <paper-toolbar><span class="title">PAYMENT SETTINGS</span></paper-toolbar>
+            <form is="iron-form" id="payment-form">
+                <h4 class="heading">
+                    <iron-icon class="small" icon="payment" prefix></iron-icon>
+                    LINK YOUR PAYPAL
+                </h4>
+                <hr>
+                <paper-input id="email-input" label="paypal email" value="{{email}}"></paper-input>
+                <paper-input id="password-input" label="password" value="{{paypass}}" type="password"></paper-input>
+                <br>
+                <paper-button raised class="submit-button" on-tap="addPayment">Add</paper-button>
+            </form>
+            <div id="payment-info">
+                <h4 class="heading">
+                    <iron-icon class="small" icon="payment" prefix></iron-icon>
+                    YOUR PAYPAL
+                </h4>
+                <iron-icon class="small" on-tap="showForm" icon="create" prefix></iron-icon>
+                <iron-icon class="small" on-tap="deletePayment" icon="delete"></iron-icon>
+                <hr>
+                <br>
+                <p class="email">{{email}}</p>
+                <p class="balance">{{balance}}</p>
             </div>
-         </form>
-        
+        </div>
+        <!-- PASSWORD CHANGE SETTINGS -->
+        <div class="password-container">
+            <paper-toolbar><span class="title">CHANGE PASSWORD</span></paper-toolbar>
+            <form is="iron-form" id="password-form">
+                <h4 class="heading">
+                    <iron-icon class="small" icon="https" prefix></iron-icon>
+                    UPDATE YOUR PASSWORD
+                </h4>
+                <hr>
+                <paper-input label="current password" type="password"></paper-input>
+                <paper-input label="new password" type="password" value="{{newPass}}"></paper-input>
+                <paper-input id="password2" label="confirm password" type="password" value="{{newPass2}}"
+                             error-message="Error! Passwords do not match!"></paper-input>
+                <br>
+                <paper-button raised class="submit-button" on-tap="updatePassword">Update</paper-button>
+            </form>
+        </div>
     </template>
 
     <script>
         Polymer({
             is: 'settings-module',
-            togglePayment: function() {
-                this.$.payments.toggle();
-            },
-            togglePassword: function() {
-                this.$.password.toggle();
-            },
-            togglePhone: function() {
-                this.$.phone.toggle();
+
+            addPayment: function () {
+                addPayment(this.email, this.paypass);
+                this.showPayment();
             },
 
-            submitForm: function () {
-                userExists(this.username, this).then(function (success) {
-                    document.getElementById('username').invalid = !success.value;
-                    if (!success.value) {
-                        document.getElementById('password').invalid = false;
-                        document.getElementById('password').value = '';
-                    }
-                });
-                authorizeUser(this.username, this.password).then(function (success) {
-                    document.getElementById('password').invalid = !success;
-                    if (success) {
-                        //TODO Navigate to user's setting page
-                    }
+            deletePayment: function () {
+                this.email = '';
+                this.paypass = '';
+                this.showForm();
+                removePayment();
+            },
+
+            showForm: function () {
+                $('#payment-form').show();
+                $('#payment-info').hide();
+            },
+
+            showPayment: function () {
+                $('#payment-form').hide();
+                $('#payment-info').show();
+            },
+
+            updatePassword: function () {
+                if (this.newPass != this.newPass2) {
+                    this.newPass2 = '';
+                    document.getElementById('password2').invalid = true;
+                } else {
+                    alert("Your password has been updated successfully");
+                    updatePassword('admin', this.newPass);
+                }
+            },
+
+            ready: function () {
+                var context = this;
+                getPayment(this).then(function (success) {
+                    success.context.email = success.email;
+                    success.context.paypass = success.password;
+                    success.context.balance = success.balance;
+                    success.context.showPayment();
+                }, function (err) {
+                    context.showForm();
                 });
             }
         });

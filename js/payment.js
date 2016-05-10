@@ -11,14 +11,19 @@ var payment = root.child('payment');
 
 /**
  * Gets the admin user's payment information
- * @returns {{email: String, password: String}}
+ * @param context - the module element's context
+ * @returns {*|Promise.<TResult>}
  */
-function getPayment() {
-    return {
-        email: payment.child("email"),
-        password: payment.child("password"),
-        balance: payment.child("balance").toLocaleString('en', {style: "currency", currency: "USD"})
-    }
+function getPayment(context) {
+    return payment.once("value", function () {
+    }, context).then(function (snapshot) {
+        return {
+            context: context,
+            email: snapshot.child("email").val(),
+            password: snapshot.child("password").val(),
+            balance: snapshot.child("balance").val().toLocaleString('en', {style: "currency", currency: "USD"})
+        }
+    });
 }
 
 /**

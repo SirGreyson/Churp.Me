@@ -48,31 +48,131 @@
   color: #0277bd;
 }
 #settings-container {
-  width: 100%;
+  width: 60%;
   margin: auto;
   font-family: Roboto-Light;
 }
-
 #settings-container a {
   text-decoration: none;
 }
-
 #settings-container paper-toolbar {
   background-color: #039be5;
 }
-
 #settings-container paper-toolbar .title {
   font-family: Roboto-Regular;
 }
-
 #settings-container paper-fab {
   margin-right: 1em;
 }
-
 #settings-container span.blue {
   color: #039be5;
 }
-
 #settings-container .campaign-title {
   background-color: #0277bd;
+}
+
+#payment-form {
+  padding: 2em;
+  margin: auto;
+  width: 100%;
+  border: 0 solid lightgray;
+  overflow: hidden;
+  text-align: center;
+  background-color: whitesmoke;
+}
+
+#payment-form hr {
+  display: block;
+  clear: both;
+}
+
+#payment-form paper-input {
+  letter-spacing: .2em;
+  text-align: left;
+}
+
+#payment-info {
+  padding: 2em;
+  margin: auto;
+  width: 100%;
+  border: 0 solid lightgray;
+  overflow: hidden;
+  text-align: center;
+  background-color: whitesmoke;
+}
+
+#payment-info hr {
+  display: block;
+  clear: both;
+}
+
+#payment-info .heading iron-icon {
+  float: left;
+  margin-right: .5em;
+}
+
+#payment-info iron-icon {
+  float: right;
+  cursor: pointer;
+  margin-right: 1em;
+}
+
+#payment-info p {
+  float: left;
+  clear: both;
+  letter-spacing: .25em;
+}
+
+#payment-info .email {
+  font-family: Roboto-Bold;
+}
+
+.password-container {
+  margin-top: 3em;
+}
+
+#password-form {
+  padding: 2em;
+  margin: auto;
+  width: 100%;
+  border: 0 solid lightgray;
+  overflow: hidden;
+  background-color: whitesmoke;
+}
+
+#password-form hr {
+  display: block;
+  clear: both;
+}
+
+.heading {
+  float: left;
+  font-family: Roboto-Medium;
+}
+
+.submit-button {
+  width: 10%;
+  border: 1px solid black;
+  float: right;
+  color: white;
+  background-color: #01579b;
+  font-family: Roboto-Light;
+}
+
+@media only screen and (max-width: 900px) {
+  #settings-container paper-toolbar .title {
+    margin-left: 0;
+  }
+
+  .heading iron-icon {
+    display: none;
+  }
+
+  #payment-info {
+    padding: .5em;
+  }
+
+  #payment-info iron-icon {
+    margin: .5em .5em 0 .5em;
+  }
 }
