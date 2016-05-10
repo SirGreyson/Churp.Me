@@ -6,6 +6,8 @@
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animatable.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/av-icons.html">
 <script src="../bower_components/firebase/firebase.js"></script>
 <script src="../js/campaigns.js"></script>
 
@@ -16,11 +18,11 @@
         a {
             text-decoration: none;
         }
-
+        
         #show-mobile {
             display: none;
         }
-
+        
         #show-desktop {
             width: 100%;
             min-width: 40em;
@@ -29,11 +31,11 @@
             margin: auto;
             padding-bottom: 3em;
         }
-
+        
         paper-fab {
             margin-right: 1em;
         }
-
+        
         .campaign-container {
             width: 50vw;
             margin: 3em auto;
@@ -41,63 +43,68 @@
             height: auto;
             text-align: center;
         }
-
+        
         .campaign-container paper-toolbar {
             background-color: lightblue;
             text-align: left;
         }
-
+        
         .campaign-info h3 {
             width: 10em;
             /*min-width: 16vw;*/
             display: inline-block;
             /*padding: 1em;*/
             margin: 1em;
-            letter-spacing: .2em;
+            font-family: Roboto-Thin;
+            font-size: 15px;
         }
-
+        
+        .campaign-info {
+            overflow: hidden;
+        }
+        
         .progress-container {
             width: 50vw;
             padding: 1em;
             margin-top: -1.3em;
         }
-
+        
         .progress-container paper-progress {
             display: inline-block;
             margin: auto;
             width: 70%;
         }
-
+        
         .progress-container h4 {
             display: inline-block;
             margin: auto;
             width: 10vw;
             padding-bottom: 1.5em;
         }
-
+        
         .transaction-container {
             width: 100%;
             margin: auto;
         }
-
+        
         .after-trans {
             margin-top: 3em;
         }
-
+        
         .transaction-header {
             letter-spacing: .2em;
             margin: 0 0 -2em 0;
             padding-top: 0 !important;
         }
-
+        
         .transaction {
             margin: 1em auto;
             /*border: 0 solid lightgray;*/
-            box-shadow: 0 0 20px 1 lightgray;
+            /*box-shadow: 0 0 10px 1px lightgray !important;*/
             height: 7em;
             width: 100%;
         }
-
+        
         .profile-picture {
             float: left;
             width: 5em;
@@ -108,11 +115,11 @@
         .info-left {
             margin-top: 1.3em;
             margin-left: 2em;
-
-            text-align: right;
+            text-align: left;
             float: left;
             white-space: nowrap;
         }
+        
         .info-right {
             margin-top: 1.3em;
             display: inline-block;
@@ -121,69 +128,100 @@
             white-space: nowrap;
             overflow: hidden;
         }
-
+        
         .transaction-info {
             white-space: nowrap;
             overflow: hidden;
         }
+        
+        .hash-name {
+            font-family: Roboto-Bold;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        .top-info-left {
+            display: inline-block;
+            text-align: center;
+            margin: 1em;
+        }
+        .top-info-right {
+            display: inline-block;
+            text-align: center;
+            margin: 1em;
+            font-size: 0.8em;
+        }
+        .top-info-right h3 {
+            margin: 0;
+        }
+        .amount {
+            color: green;
+        }
+        
+        .repeat-icon {
+            color: #039be5;
+        }
+        .fav-icon {
+            color: #ff4081;
+        }
+        
         @media only screen and (min-width: 1500px) {
             .info-left {
                 margin-top: 1.3em;
                 margin-left: 10em;
-
                 text-align: right;
                 float: left;
                 white-space: nowrap;
             }
         }
-
+        
         @media only screen and (max-width: 900px) {
             #show-mobile {
                 display: inline;
                 width: 100vw;
                 height: 100vh;
             }
-
+            #main-toolbar {
+                width: 60vw;
+            }
+            #next-button {
+                margin-left: 1em;
+            }
             #show-mobile .title {
                 margin-left: -.2em;
             }
-
+            .campaign-title {
+                margin-bottom: 1em;
+            }
             #show-desktop {
                 display: none;
             }
-
             .campaign-container {
-                height: 100vh !important;
+                /*height: 100vh !important;*/
                 width: 100%;
                 margin: 0 auto;
             }
-
             .campaign-info h3 {
                 width: 100%;
                 margin: .5em auto;
                 padding: 0;
+                letter-spacing: 0;
             }
-
             .progress-container {
                 width: 100%;
                 margin-top: .1em;
             }
-
             .progress-container h4 {
                 display: block;
             }
-
             .transaction-container {
                 width: 100%;
             }
-
             .transaction-info {
                 width: 80%;
                 text-align: center;
                 display: inline;
             }
-            
-
             .transaction-info h4 {
                 width: 28%;
                 margin: 2em 1em 2em 0;
@@ -195,7 +233,7 @@
     <template>
         <!-- FORMATTING FOR DESKTOP DISPLAY -->
         <div id="show-desktop">
-            <paper-toolbar>
+            <paper-toolbar id="main-toolbar">
                 <span class="title">Campaign Management</span>
                 <paper-fab mini icon="av:library-add" title="add"></paper-fab>
             </paper-toolbar>
@@ -209,19 +247,24 @@
                                                onclick="removeCampaign(this.id)"></paper-icon-button>
                         </paper-toolbar>
                         <div class="campaign-info">
-                            <h3>Hashtag: <a href="http://twitter.com/hashtag/{{item.hashtag}}" target="_blank"><span
-                                    class="blue">#{{item.hashtag}}</span></a></h3>
+                            <div class="top-info-left">
+                            <h2 class="hash-name"><a href="http://twitter.com/hashtag/{{item.hashtag}}" target="_blank"><span
+                                    class="blue">#{{item.hashtag}}</span></a></h2>
+                            </div>
+                            <div class="top-info-right">
                             <h3>Completion Date: {{item.dateString}}</h3>
+                            </div>
                             <div class="progress-container">
                                 <paper-progress value="{{item.balance}}" max="{{item.target}}"
                                                 class="green"></paper-progress>
                                                 <br>
                                 <h4>${{item.balance}}/{{item.target}}</h4>
-                                <hr>
+                                <!--<hr>-->
                             </div>
                             <div class="transaction-container">
-                                <h3 class="transaction-header">Transactions:</h3>
+                                <!--<h3 class="transaction-header">Transactions</h3>-->
                                 <template is="dom-repeat" items="{{item.transactions}}">
+                                    <hr>
                                     <div class="transaction">
                                         <img class="profile-picture"
                                              src="https://pbs.twimg.com/profile_images/{{item.picture}}">
@@ -230,30 +273,32 @@
                                                 <h4><a href="https://twitter.com/{{item.username}}" target="_blank"><span
                                                         class="blue">@{{item.username}}</span></a>
                                                 </h4>
-                                                <h4>Favorites: {{item.favorites}}</h4>
+                                                <h4><iron-icon class="fav-icon" icon="favorite"></iron-icon>{{item.favorites}}</h4>
                                             </div>
                                             <div class="info-right">
-                                                <h4>Amount: {{item.amount}}</h4>
-                                                <h4>Retweets: {{item.retweets}}</h4>
+                                                <h4 class="amount">{{item.amount}}</h4>
+                                                <h4><iron-icon class="repeat-icon" icon="av:repeat"></iron-icon>{{item.retweets}}</h4>
+                                                
                                             </div>
                                         </div>
                                     </div>
+
                                 </template>
-                            </div>
-                            <hr class="after-trans">
-                        </div>
-                    </paper-header-panel>
-                </div>
-            </template>
-        </div>
-        <!-- FORMATTING FOR MOBILE DISPLAY -->
-        <div id="show-mobile">
-            <paper-toolbar>
-                <span class="title">Campaign Management</span>
-                <paper-fab mini icon="av:library-add" title="add"></paper-fab>
-            </paper-toolbar>
-            <neon-animated-pages selected="0" entry-animation="[[entryAnimation]]" exit-animation="[[exitAnimation]]">
-                <template is="dom-repeat" items="{{campaigns}}">
+    </div>
+    <!--<hr class="after-trans">-->
+    </div>
+    </paper-header-panel>
+    </div>
+    </template>
+    </div>
+    <!-- FORMATTING FOR MOBILE DISPLAY -->
+    <div id="show-mobile">
+        <paper-toolbar>
+            <span class="title">Campaign Management</span>
+            <paper-fab mini icon="av:library-add" title="add"></paper-fab>
+        </paper-toolbar>
+        <neon-animated-pages selected="0" entry-animation="[[entryAnimation]]" exit-animation="[[exitAnimation]]">
+            <template is="dom-repeat" items="{{campaigns}}">
                     <neon-animatable class="campaign-container">
                         <paper-header-panel>
                             <paper-toolbar class="campaign-title">
@@ -261,21 +306,26 @@
                                 <paper-icon-button icon="create"></paper-icon-button>
                                 <paper-icon-button id="mobile-{{item.id}}" icon="delete"
                                                    onclick="removeCampaign(this.id)"></paper-icon-button>
-                                <paper-icon-button icon="arrow-forward" on-click="_onNextClick"></paper-icon-button>
+                                <paper-icon-button id="next-button" icon="arrow-forward" on-click="_onNextClick"></paper-icon-button>
                             </paper-toolbar>
                             <div class="campaign-info">
-                                <h3>Hashtag: <a href="http://twitter.com/hashtag/{{item.hashtag}}" target="_blank"><span
-                                        class="blue">#{{item.hashtag}}</span></a></h3>
+                                <div class="top-info-left">
+                                <h2 class="hash-name"><a href="http://twitter.com/hashtag/{{item.hashtag}}" target="_blank"><span
+                                        class="blue">#{{item.hashtag}}</span></a></h2>
+                                        </div>
+                                        <div class="top-info-right">
                                 <h3>Completion Date: {{item.dateString}}</h3>
+                                </div>
                                 <div class="progress-container">
                                     <paper-progress value="{{item.balance}}" max="{{item.target}}"
                                                     class="green"></paper-progress>
                                     <h4>${{item.balance}}/{{item.target}}</h4>
-                                    <hr>
+                                    <!--<hr>-->
                                 </div>
                                 <div class="transaction-container">
-                                    <h3 class="transaction-header">Transactions:</h3>
+                                    <!--<h3 class="transaction-header">Transactions</h3>-->
                                     <template is="dom-repeat" items="{{item.transactions}}">
+                                        <hr>
                                         <div class="transaction">
                                             <img class="profile-picture"
                                                  src="https://pbs.twimg.com/profile_images/{{item.picture}}">
@@ -284,22 +334,21 @@
                                                        target="_blank"><span
                                                         class="blue">@{{item.username}}</span></a>
                                                 </h4>
-                                                <h4>Amount: {{item.amount}}</h4>
+                                                <h4 class="amount">{{item.amount}}</h4>
                                             </div>
                                         </div>
                                     </template>
-                                </div>
-                                <hr class="after-trans">
-                            </div>
-                        </paper-header-panel>
-                    </neon-animatable>
-                </template>
-            </neon-animated-pages>
-        </div>
+    </div>
+    <!--<hr class="after-trans">-->
+    </div>
+    </paper-header-panel>
+    </neon-animatable>
+    </template>
+    </neon-animated-pages>
+    </div>
     </template>
 
     <script>
-
         Polymer({
             is: 'campaign-module',
 
@@ -321,6 +370,5 @@
                 })
             }
         })
-
     </script>
 </dom-module>
