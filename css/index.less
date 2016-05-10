@@ -10,6 +10,8 @@ body {
 
   img {
     margin-bottom: -5em;
+    width: 100%;
+    max-width: 30em;
   }
 
   h1 {
@@ -22,31 +24,35 @@ body {
 
   #login-form {
     width: 25%;
+    min-width: 30em;
     margin: auto;
     padding: 2em;
     font-family: Roboto-Light;
-
     paper-input {
       letter-spacing: .25em;
     }
 
     #register {
       letter-spacing: .5em;
-      display: inline-block;
       font-family: Roboto-Medium;
       text-decoration: none;
-      margin: 2.7em auto 0 12em;
+      // margin: 2.7em auto 0 12em;
+      display: inline-block;
+      margin-top: 2.5em;
+      margin-left: 6em;
     }
 
     #submit {
-      float: right;
+      display: block;
       width: 10em;
       background: @dark-blue;
       color: white;
       letter-spacing: .5em;
-      display: inline-block;
+      display: block;
       font-family: Roboto-Medium;
+      float: right;
       margin-top: 2em;
+      
     }
   }
 }
