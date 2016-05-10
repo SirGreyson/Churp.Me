@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Churp - Account Settings</title>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" type="text/css"/>
+        <link rel="stylesheet" href="css/settings.css" type="text/css">
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/firebase/firebase.js"></script>
+        <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+        <link rel="import" href="elements/campaign-module.html">
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="info-container">
+                    <h1>Welcome, Admin!</h1>
+                    <img src="images/admin-image.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="tab-container">
+                    <paper-tabs noink no-bar selected="0">
+                        <paper-tab onclick="showCampaigns()">CAMPAIGNS</paper-tab>
+                        <paper-tab onclick="showSettings()">SETTINGS</paper-tab>
+                    </paper-tabs>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="settings-container">
+                    <campaign-module></campaign-module>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

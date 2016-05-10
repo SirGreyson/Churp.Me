@@ -1,0 +1,52 @@
+@import "variables.less";
+
+body {
+  background-color: @primary-gray;
+}
+
+.logo-container {
+  margin-top: 3em;
+  text-align: center;
+
+  img {
+    margin-bottom: -5em;
+  }
+
+  h1 {
+    font-family: Roboto-Bold;
+    letter-spacing: .25em;
+  }
+}
+
+.login-container {
+
+  #login-form {
+    width: 25%;
+    margin: auto;
+    padding: 2em;
+    font-family: Roboto-Light;
+
+    paper-input {
+      letter-spacing: .25em;
+    }
+
+    #register {
+      letter-spacing: .5em;
+      display: inline-block;
+      font-family: Roboto-Medium;
+      text-decoration: none;
+      margin: 2.7em auto 0 12em;
+    }
+
+    #submit {
+      float: right;
+      width: 10em;
+      background: @dark-blue;
+      color: white;
+      letter-spacing: .5em;
+      display: inline-block;
+      font-family: Roboto-Medium;
+      margin-top: 2em;
+    }
+  }
+}

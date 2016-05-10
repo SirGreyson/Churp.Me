@@ -1,0 +1,56 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<script src="../bower_components/firebase/firebase.js"></script>
+<script src="../js/users.js"></script>
+
+<dom-module id="login-module">
+
+    <style>
+        paper-input {
+            --paper-input-container-color: #01579b;
+        }
+    </style>
+
+    <template>
+        <form is="iron-form" id="login-form">
+            <paper-input required id="username" label="twitter username" bind-value="{{username}}"
+                         error-message="Error! Invalid username!">
+            </paper-input>
+            <paper-input required id="password" label="password" type="password" bind-value="{{password}}"
+                         error-message="Error! Invalid password!"></paper-input>
+            <!--TODO: Add Forgot Password?-->
+            <a id="register" href="/register.html">register</a>
+            <paper-button id="submit" raised on-tap="submitForm">LOGIN</paper-button>
+        </form>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'login-module',
+
+            submitForm: function () {
+                if (this.username == null || this.username.length < 1) {
+                    document.getElementById('username').invalid = true;
+                    return;
+                }
+                userExists(this.username, this).then(function (success) {
+                    document.getElementById('username').invalid = !success.value;
+                    if (!success.value) {
+                        document.getElementById('password').invalid = false;
+                        document.getElementById('password').value = '';
+                    }
+                });
+                authorizeUser(this.username, this.password).then(function (success) {
+                    document.getElementById('password').invalid = !success;
+                    if (success) {
+                        window.location = "/settings.html";
+                    }
+                });
+            }
+        })
+    </script>
+
+</dom-module>

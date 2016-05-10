@@ -1,0 +1,62 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<script src="../bower_components/firebase/firebase.js"></script>
+<script src="../js/users.js"></script>
+
+<dom-module id="register-module">
+
+    <style>
+        paper-input {
+            --paper-input-container-color: #01579b;
+        }
+    </style>
+
+    <template>
+        <form is="iron-form" id="register-form">
+            <paper-input required id="username" label="twitter username" bind-value="{{username}}"
+                         error-message="{{errMessage}}">
+            </paper-input>
+            <paper-input required id="password" label="password" type="password" bind-value="{{password}}"
+                         error-message="Error! Invalid password!"></paper-input>
+            <paper-input required id="password2" label="confirm password" type="password" bind-value="{{password2}}"
+                         error-message="Error! Passwords do not match!"></paper-input>
+            <a id="login" href="/index.html">login</a>
+            <paper-button id="submit" raised on-tap="submitForm">REGISTER</paper-button>
+        </form>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'register-module',
+
+            submitForm: function () {
+                if (this.username == null || this.username.length < 1) {
+                    this.errMessage = 'Error! Invalid username!';
+                    document.getElementById('username').invalid = true;
+                    return;
+                }
+                userExists(this.username, this).then(function (success) {
+                    if (success.value) {
+                        success.context.errMessage = 'Error! There is already an account with that username!';
+                        document.getElementById('username').invalid = true;
+                        document.getElementById('password').invalid = false;
+                        document.getElementById('password').value = '';
+                        document.getElementById('password2').invalid = false;
+                        document.getElementById('password2').value = '';
+                    }
+                    else if (this.password != this.password2) {
+                        document.getElementById('password2').invalid = true;
+                    }
+                    else {
+                        addUser(this.username, this.password);
+                        window.location = "/settings.html";
+                    }
+                });
+            }
+        })
+    </script>
+
+</dom-module>
