@@ -24,12 +24,17 @@ function getCampaigns(context) {
     })
 }
 
-function getCampaign(id, context) {
+/**
+ * Returns a specific campaign
+ * @param id
+ * @param context
+ * @returns {Promise.<TResult>|*}
+ */
+function getCampaign(id) {
     return campaigns.child(id).once("value", function () {
-    }, context).then(function (snapshot) {
+    }).then(function (snapshot) {
         return {
-            value: snapshot.val(),
-            context: context
+            value: snapshot.val()
         }
     })
 }

@@ -234,12 +234,11 @@
             id = id.startsWith('edit') ? id.substr(4, id.length) : id.substr(5, id.length);
             getCampaign(id, this).then(function (success) {
                 var context = document.querySelector('campaign-module');
-                //var context = success.context;
                 context.title = success.value.title;
                 context.hashtag = success.value.hashtag;
                 context.target = success.value.target;
                 context.end = parseTimestamp(success.value.end);
-                console.log(success.value.end);
+                console.log(parseTimestamp(success.value.end));
                 context.openDialog();
             });
         }
