@@ -4,6 +4,7 @@
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <script src="../bower_components/firebase/firebase.js"></script>
 <script src="../js/payment.js"></script>
+<script src="../js/users.js"></script>
 
 <dom-module id="settings-module">
 
@@ -50,7 +51,7 @@
                     UPDATE YOUR PASSWORD
                 </h4>
                 <hr>
-                <paper-input label="current password" type="password"></paper-input>
+                <paper-input label="current password" type="password" value="{{oldPass}}"></paper-input>
                 <paper-input label="new password" type="password" value="{{newPass}}"></paper-input>
                 <paper-input id="password2" label="confirm password" type="password" value="{{newPass2}}"
                              error-message="Error! Passwords do not match!"></paper-input>
@@ -93,6 +94,10 @@
                 } else {
                     alert("Your password has been updated successfully");
                     updatePassword('admin', this.newPass);
+                    console.log('sup')
+                    this.oldPass = '';
+                    this.newPass = '';
+                    this.newPass2 = '';
                 }
             },
 
