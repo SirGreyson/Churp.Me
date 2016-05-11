@@ -24,7 +24,7 @@
 /**
 ** COLOR VARIABLE IMPORTATION **
 **/
-#button {
+.dialog-button {
   width: 10%;
   border: 1px solid black;
   float: right;
@@ -46,6 +46,7 @@ paper-input #head {
 }
 #add-campaign #camp-header {
   background-color: #01579b;
+  margin-top: 0;
 }
 #add-campaign h2 {
   overflow: visible !important;
@@ -281,7 +282,7 @@ paper-input #head {
   float: left;
   width: 6em;
   border-radius: 100%;
-  margin: 1em 0 0 1em;
+  margin: 1em 0 0 3em;
 }
 #campaign-module .info-left {
   margin-top: 1.3em;

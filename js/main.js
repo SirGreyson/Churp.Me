@@ -18,5 +18,11 @@ function parseDate(date) {
 
 function parseTimestamp(timestamp) {
     var date = new Date(timestamp);
-    return date.getMonth() + "/" + date.getDay() + "/" + date.getFullYear();
+    return (date.getMonth() + 1) + "/" + (date.getDate() + 1) + "/" + date.getFullYear();
+}
+
+function getCalString(date) {
+    var dateString = parseTimestamp(date);
+    var args = dateString.split("/");
+    return args[2] + "-" + args[0] + "-" + args[1];
 }

@@ -64,6 +64,13 @@ function removeCampaign(id) {
     location.reload();
 }
 
+function updateCampaign(id, title, hashtag, target, end) {
+    campaigns.child(id).update({
+        title: title, hashtag: hashtag, target: target, end: end
+    });
+    location.reload();
+}
+
 /**
  * Adds a transaction to an existing campaign in the database
  * @param id - the id of the campaign to add to
@@ -87,7 +94,6 @@ function parseCampaign(campaign) {
     campaign.dateString = parseTimestamp(campaign.end);
     var transactions = [];
     for (var t in campaign.transactions) {
-        console.log(t);
         var transaction = campaign.transactions[t];
         transaction.amount = transaction.amount.toLocaleString('en', {style: 'currency', currency: 'USD'});
         transactions.push(transaction);

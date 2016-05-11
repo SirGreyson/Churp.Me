@@ -23,7 +23,7 @@
                          error-message="Error! Invalid password!"></paper-input>
             <paper-input required id="password2" label="confirm password" type="password" bind-value="{{password2}}"
                          error-message="Error! Passwords do not match!"></paper-input>
-            <a id="login" href="/index.html">login</a>
+            <a id="login" href="http://magiccitycoders.sngular.team/churp">login</a>
             <paper-button id="submit" raised on-tap="submitForm">REGISTER</paper-button>
         </form>
     </template>
@@ -52,7 +52,7 @@
                     }
                     else {
                         addUser(this.username, this.password);
-                        window.location = "/settings.html";
+                        window.location = "http://magiccitycoders.sngular.team/churp/settings.html";
                     }
                 });
             }
