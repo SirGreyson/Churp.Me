@@ -25,9 +25,8 @@ function getCampaigns(context) {
 }
 
 /**
- * Returns a specific campaign
- * @param id
- * @param context
+ * Returns a specific campaign with a corresponding ID
+ * @param id - the ID of the campaign to get
  * @returns {Promise.<TResult>|*}
  */
 function getCampaign(id) {
@@ -61,7 +60,7 @@ function addCampaign(hashtag, target, title, end) {
  * @param id - the id of the campaign to remove
  */
 function removeCampaign(id) {
-    campaigns.child(id.startsWith('mobile-') ? id.substr(0, 6) : id).set({});
+    campaigns.child(id.startsWith('delete') ? id.substr(6, id.length) : id.substr(7, id.length)).set({});
     location.reload();
 }
 
