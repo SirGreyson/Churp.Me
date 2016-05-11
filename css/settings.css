@@ -24,6 +24,28 @@
 /**
 ** COLOR VARIABLE IMPORTATION **
 **/
+#button {
+  width: 10%;
+  border: 1px solid black;
+  float: right;
+  color: white;
+  background-color: #01579b;
+  font-family: Roboto-Light;
+  margin-bottom: 1em;
+}
+#add-campaign {
+  height: auto;
+  width: 100%;
+  max-width: 50em;
+}
+#add-campaign #camp-header {
+  background-color: #01579b;
+}
+#add-campaign h2 {
+  overflow: visible !important;
+  word-wrap: normal;
+  overflow-wrap: break-word;
+}
 #info-container {
   background-color: #0277bd;
   padding: 2em 0 4em 0;
@@ -144,6 +166,18 @@
   color: white;
   background-color: #01579b;
   font-family: Roboto-Light;
+}
+@media only screen and (max-width: 485px) {
+  #add-campaign {
+    height: auto;
+    width: 100%;
+  }
+  #add-campaign h2 {
+    overflow: visible !important;
+    word-wrap: normal;
+    overflow-wrap: break-word;
+    font-size: 1em;
+  }
 }
 @media only screen and (min-width: 900px) {
   #settings-container paper-toolbar .title {

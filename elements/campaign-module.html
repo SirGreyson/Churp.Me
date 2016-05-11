@@ -94,7 +94,7 @@
             <div id="show-mobile">
                 <paper-toolbar>
                     <span class="title">Campaign Management</span>
-                    <paper-fab mini icon="av:library-add" title="add"></paper-fab>
+                    <paper-fab mini icon="av:library-add" title="add" on-tap="openDialog"></paper-fab>
                 </paper-toolbar>
                 <neon-animated-pages selected="0" entry-animation="[[entryAnimation]]"
                                      exit-animation="[[exitAnimation]]">
@@ -153,7 +153,9 @@
         <!-- ADD CAMPAIGN DIALOG -->
         <paper-dialog id="add-campaign" entry-animation="scale-up-animation" exit-animation="fade-out-animation"
                       with-backdrop>
-            <h2>Let's start with some basic information...</h2>
+            <paper-toolbar id="camp-header">
+                <h2>Let's start with some basic information...</h2>
+            </paper-toolbar>
             <paper-input id="campaign-name" label="campaign name" value="{{title}}"
                          error-message="Error! You must provide a name for your campaign!" required>
                 <iron-icon icon="info-outline" prefix></iron-icon>
@@ -171,8 +173,8 @@
                 <iron-icon icon="date-range" prefix></iron-icon>
             </paper-input>
             <div class="dialog-buttons">
-                <paper-button dialog-dismiss>Cancel</paper-button>
-                <paper-button on-tap="addCampaign">Add</paper-button>
+                <paper-button id="button" dialog-dismiss>Cancel</paper-button>
+                <paper-button id="button" on-tap="addCampaign">Add</paper-button>
             </div>
         </paper-dialog>
         <!-- EDIT CAMPAIGN DIALOG -->
