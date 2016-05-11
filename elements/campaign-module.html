@@ -35,7 +35,7 @@
                                 <span class="title">{{item.title}}</span>
                                 <paper-icon-button id="edit{{item.id}}" icon="create"
                                                    onclick="editCampaign(this.id)"></paper-icon-button>
-                                <paper-icon-button id="remove{{item.id}}" icon="delete"
+                                <paper-icon-button id="delete{{item.id}}" icon="delete"
                                                    onclick="removeCampaign(this.id)"></paper-icon-button>
                             </paper-toolbar>
                             <div class="campaign-info">
@@ -231,8 +231,8 @@
         });
 
         function editCampaign(id) {
-            id = id.startsWith('edit') ? id.substr(4, id.length) : id.substr(5, id.length);
-            getCampaign(id, this).then(function (success) {
+            id = id.startsWith('edit') ? id.substr(4, id.length) : id.substr(7, id.length);
+            getCampaign(id).then(function (success) {
                 var context = document.querySelector('campaign-module');
                 context.title = success.value.title;
                 context.hashtag = success.value.hashtag;
@@ -242,8 +242,5 @@
                 context.openDialog();
             });
         }
-        //        function openDialog() {
-        //            document.getElementById('add-campaign').open();
-        //        }
     </script>
 </dom-module>
