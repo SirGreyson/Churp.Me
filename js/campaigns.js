@@ -24,6 +24,16 @@ function getCampaigns(context) {
     })
 }
 
+function getCampaign(id, context) {
+    return campaigns.child(id).once("value", function () {
+    }, context).then(function (snapshot) {
+        return {
+            value: snapshot.val(),
+            context: context
+        }
+    })
+}
+
 /**
  * Adds a campaign with the specified criteria to the database
  * @param hashtag - the hashtag to use when supporting the campaign
@@ -46,8 +56,8 @@ function addCampaign(hashtag, target, title, end) {
  * @param id - the id of the campaign to remove
  */
 function removeCampaign(id) {
-    //TODO Make this auto-update campaign page
     campaigns.child(id.startsWith('mobile-') ? id.substr(0, 6) : id).set({});
+    location.reload();
 }
 
 /**
@@ -69,10 +79,11 @@ function addTransaction(id, amount, username) {
  * @param id - the id of the campaign to parse
  * @param campaign - the campaign object to parse
  */
-function parseCampaign(id, campaign) {
+function parseCampaign(campaign) {
     campaign.dateString = parseTimestamp(campaign.end);
     var transactions = [];
     for (var t in campaign.transactions) {
+        console.log(t);
         var transaction = campaign.transactions[t];
         transaction.amount = transaction.amount.toLocaleString('en', {style: 'currency', currency: 'USD'});
         transactions.push(transaction);

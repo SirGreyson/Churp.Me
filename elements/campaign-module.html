@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-icons/av-icons.html">
+<link rel="import" href="../bower_components/iron-icons/editor-icons.html">
 <link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="../bower_components/paper-progress/paper-progress.html">
@@ -8,6 +9,7 @@
 <link rel="import" href="../bower_components/neon-animation/neon-animations.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-icons/av-icons.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <script src="../bower_components/firebase/firebase.js"></script>
 <script src="../js/campaigns.js"></script>
 
@@ -20,94 +22,35 @@
 
     <template>
         <div id="campaign-module">
-        <!-- FORMATTING FOR DESKTOP DISPLAY -->
-        <div id="show-desktop">
-            <paper-toolbar id="main-toolbar">
-                <span class="title">Campaign Management</span>
-                <paper-fab mini icon="av:library-add" title="add"></paper-fab>
-            </paper-toolbar>
-            <template is="dom-repeat" items="{{campaigns}}">
-                <div class="campaign-container">
-                    <paper-header-panel>
-                        <paper-toolbar class="campaign-title">
-                            <span class="title">{{item.title}}</span>
-                            <paper-icon-button icon="create"></paper-icon-button>
-                            <paper-icon-button id="{{item.id}}" icon="delete"
-                                               onclick="removeCampaign(this.id)"></paper-icon-button>
-                        </paper-toolbar>
-                        <div class="campaign-info">
-                            <div class="top-info-left">
-                            <h2 class="hash-name"><a href="http://twitter.com/hashtag/{{item.hashtag}}" target="_blank"><span
-                                    class="blue">#{{item.hashtag}}</span></a></h2>
-                            </div>
-                            <div class="top-info-right">
-                            <h3>Completion Date: {{item.dateString}}</h3>
-                            </div>
-                            <div class="progress-container">
-                                <paper-progress value="{{item.balance}}" max="{{item.target}}"
-                                                class="green"></paper-progress>
-                                                <br>
-                                <h4>${{item.balance}}/{{item.target}}</h4>
-                                <!--<hr>-->
-                            </div>
-                            <div class="transaction-container">
-                                <!--<h3 class="transaction-header">Transactions</h3>-->
-                                <template is="dom-repeat" items="{{item.transactions}}">
-                                    <hr>
-                                    <div class="transaction">
-                                        <img class="profile-picture"
-                                             src="https://pbs.twimg.com/profile_images/{{item.picture}}">
-                                        <div class="transaction-info">
-                                            <div class="info-left">
-                                                <h4><a href="https://twitter.com/{{item.username}}" target="_blank"><span
-                                                        class="blue">@{{item.username}}</span></a>
-                                                </h4>
-                                                <h4><iron-icon class="fav-icon" icon="favorite"></iron-icon>{{item.favorites}}</h4>
-                                            </div>
-                                            <div class="info-right">
-                                                <h4 class="amount">{{item.amount}}</h4>
-                                                <h4><iron-icon class="repeat-icon" icon="av:repeat"></iron-icon>{{item.retweets}}</h4>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </template>
-    </div>
-    <!--<hr class="after-trans">-->
-    </div>
-    </paper-header-panel>
-    </div>
-    </template>
-    </div>
-    <!-- FORMATTING FOR MOBILE DISPLAY -->
-    <div id="show-mobile">
-        <paper-toolbar>
-            <span class="title">Campaign Management</span>
-            <paper-fab mini icon="av:library-add" title="add"></paper-fab>
-        </paper-toolbar>
-        <neon-animated-pages selected="0" entry-animation="[[entryAnimation]]" exit-animation="[[exitAnimation]]">
-            <template is="dom-repeat" items="{{campaigns}}">
-                    <neon-animatable class="campaign-container">
+            <!-- FORMATTING FOR DESKTOP DISPLAY -->
+            <div id="show-desktop">
+                <paper-toolbar id="main-toolbar">
+                    <span class="title">Campaign Management</span>
+                    <paper-fab mini icon="av:library-add" title="add" on-tap="openDialog"></paper-fab>
+                </paper-toolbar>
+                <template is="dom-repeat" items="{{campaigns}}">
+                    <div class="campaign-container">
                         <paper-header-panel>
                             <paper-toolbar class="campaign-title">
                                 <span class="title">{{item.title}}</span>
-                                <paper-icon-button icon="create"></paper-icon-button>
-                                <paper-icon-button id="mobile-{{item.id}}" icon="delete"
+                                <paper-icon-button id="edit{{item.id}}" icon="create"
+                                                   onclick="editCampaign(this.id)"></paper-icon-button>
+                                <paper-icon-button id="remove{{item.id}}" icon="delete"
                                                    onclick="removeCampaign(this.id)"></paper-icon-button>
-                                <paper-icon-button id="next-button" icon="arrow-forward" on-click="_onNextClick"></paper-icon-button>
                             </paper-toolbar>
                             <div class="campaign-info">
                                 <div class="top-info-left">
-                                <h2 class="hash-name"><a href="http://twitter.com/hashtag/{{item.hashtag}}" target="_blank"><span
-                                        class="blue">#{{item.hashtag}}</span></a></h2>
-                                        </div>
-                                        <div class="top-info-right">
-                                <h3>Completion Date: {{item.dateString}}</h3>
+                                    <h2 class="hash-name"><a href="http://twitter.com/hashtag/{{item.hashtag}}"
+                                                             target="_blank"><span
+                                            class="blue">#{{item.hashtag}}</span></a></h2>
+                                </div>
+                                <div class="top-info-right">
+                                    <h3>Completion Date: {{item.dateString}}</h3>
                                 </div>
                                 <div class="progress-container">
                                     <paper-progress value="{{item.balance}}" max="{{item.target}}"
                                                     class="green"></paper-progress>
+                                    <br>
                                     <h4>${{item.balance}}/{{item.target}}</h4>
                                     <!--<hr>-->
                                 </div>
@@ -119,23 +62,120 @@
                                             <img class="profile-picture"
                                                  src="https://pbs.twimg.com/profile_images/{{item.picture}}">
                                             <div class="transaction-info">
-                                                <h4><a href="https://twitter.com/{{item.username}}"
-                                                       target="_blank"><span
-                                                        class="blue">@{{item.username}}</span></a>
-                                                </h4>
-                                                <h4 class="amount">{{item.amount}}</h4>
+                                                <div class="info-left">
+                                                    <h4><a href="https://twitter.com/{{item.username}}" target="_blank"><span
+                                                            class="blue">@{{item.username}}</span></a>
+                                                    </h4>
+                                                    <h4>
+                                                        <iron-icon class="fav-icon" icon="favorite"></iron-icon>
+                                                        {{item.favorites}}
+                                                    </h4>
+                                                </div>
+                                                <div class="info-right">
+                                                    <h4 class="amount">{{item.amount}}</h4>
+                                                    <h4>
+                                                        <iron-icon class="repeat-icon" icon="av:repeat"></iron-icon>
+                                                        {{item.retweets}}
+                                                    </h4>
+
+                                                </div>
                                             </div>
                                         </div>
+
                                     </template>
-    </div>
-    <!--<hr class="after-trans">-->
-    </div>
-    </paper-header-panel>
-    </neon-animatable>
-    </template>
-    </neon-animated-pages>
-    </div>
-    </div>
+                                </div>
+                                <!--<hr class="after-trans">-->
+                            </div>
+                        </paper-header-panel>
+                    </div>
+                </template>
+            </div>
+            <!-- FORMATTING FOR MOBILE DISPLAY -->
+            <div id="show-mobile">
+                <paper-toolbar>
+                    <span class="title">Campaign Management</span>
+                    <paper-fab mini icon="av:library-add" title="add"></paper-fab>
+                </paper-toolbar>
+                <neon-animated-pages selected="0" entry-animation="[[entryAnimation]]"
+                                     exit-animation="[[exitAnimation]]">
+                    <template is="dom-repeat" items="{{campaigns}}">
+                        <neon-animatable class="campaign-container">
+                            <paper-header-panel>
+                                <paper-toolbar class="campaign-title">
+                                    <span class="title">{{item.title}}</span>
+                                    <paper-icon-button id="emobile{{item.id}}" icon="create"
+                                                       onclick="editCampaign(this.id)"></paper-icon-button>
+                                    <paper-icon-button id="dmobile{{item.id}}" icon="delete"
+                                                       onclick="removeCampaign(this.id)"></paper-icon-button>
+                                    <paper-icon-button id="next-button" icon="arrow-forward"
+                                                       on-click="_onNextClick"></paper-icon-button>
+                                </paper-toolbar>
+                                <div class="campaign-info">
+                                    <div class="top-info-left">
+                                        <h2 class="hash-name"><a href="http://twitter.com/hashtag/{{item.hashtag}}"
+                                                                 target="_blank"><span
+                                                class="blue">#{{item.hashtag}}</span></a></h2>
+                                    </div>
+                                    <div class="top-info-right">
+                                        <h3>Completion Date: {{item.dateString}}</h3>
+                                    </div>
+                                    <div class="progress-container">
+                                        <paper-progress value="{{item.balance}}" max="{{item.target}}"
+                                                        class="green"></paper-progress>
+                                        <h4>${{item.balance}}/{{item.target}}</h4>
+                                        <!--<hr>-->
+                                    </div>
+                                    <div class="transaction-container">
+                                        <!--<h3 class="transaction-header">Transactions</h3>-->
+                                        <template is="dom-repeat" items="{{item.transactions}}">
+                                            <hr>
+                                            <div class="transaction">
+                                                <img class="profile-picture"
+                                                     src="https://pbs.twimg.com/profile_images/{{item.picture}}">
+                                                <div class="transaction-info">
+                                                    <h4><a href="https://twitter.com/{{item.username}}"
+                                                           target="_blank"><span
+                                                            class="blue">@{{item.username}}</span></a>
+                                                    </h4>
+                                                    <h4 class="amount">{{item.amount}}</h4>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <!--<hr class="after-trans">-->
+                                </div>
+                            </paper-header-panel>
+                        </neon-animatable>
+                    </template>
+                </neon-animated-pages>
+            </div>
+        </div>
+        <!-- ADD CAMPAIGN DIALOG -->
+        <paper-dialog id="add-campaign" entry-animation="scale-up-animation" exit-animation="fade-out-animation"
+                      with-backdrop>
+            <h2>Let's start with some basic information...</h2>
+            <paper-input id="campaign-name" label="campaign name" value="{{title}}"
+                         error-message="Error! You must provide a name for your campaign!" required>
+                <iron-icon icon="info-outline" prefix></iron-icon>
+            </paper-input>
+            <paper-input id="campaign-hashtag" label="hashtag" value="{{hashtag}}"
+                         error-message="Error! You must provide a hashtag for your campaign" required>
+                <h2 prefix>#</h2>
+            </paper-input>
+            <paper-input id="campaign-target" label="target amount" value="{{target}}" type="number"
+                         error-message="Error! You must provide a target amount for your campaign" required>
+                <iron-icon icon="editor:attach-money" prefix></iron-icon>
+            </paper-input>
+            <paper-input id="campaign-end" label="completion date" value="{{end}}" type="date"
+                         error-message="Error! You must provide a completion date for your campaign" required>
+                <iron-icon icon="date-range" prefix></iron-icon>
+            </paper-input>
+            <div class="dialog-buttons">
+                <paper-button dialog-dismiss>Cancel</paper-button>
+                <paper-button on-tap="addCampaign">Add</paper-button>
+            </div>
+        </paper-dialog>
+        <!-- EDIT CAMPAIGN DIALOG -->
     </template>
 
     <script>
@@ -149,16 +189,62 @@
                 pages.selectNext();
             },
 
+            openDialog: function () {
+                document.getElementById('add-campaign').open();
+            },
+
+            addCampaign: function () {
+                var nameElement = document.getElementById('campaign-name');
+                var tagElement = document.getElementById('campaign-hashtag');
+                var targetElement = document.getElementById('campaign-target');
+                var endElement = document.getElementById('campaign-end');
+                nameElement.invalid = this.title == null || this.title.length < 1;
+                tagElement.invalid = this.hashtag == null || this.hashtag.length < 1;
+                targetElement.invalid = this.target == null || this.target <= 0;
+                endElement.invalid = this.end == null || this.end == '';
+                if (!nameElement.invalid && !tagElement.invalid && !targetElement.invalid && !endElement.invalid) {
+                    var dateArgs = this.end.split("-");
+                    this.end = dateArgs[1] + "/" + dateArgs[2] + "/" + dateArgs[0];
+                    console.log(this.end);
+                    addCampaign(this.hashtag, this.target, this.title, this.end);
+                    document.getElementById('add-campaign').close();
+//                    location.reload();
+                }
+            },
+
+            parseCampaign: function (id, campaign) {
+                var campaign = parseCampaign(campaign);
+                campaign.id = id;
+                return campaign;
+            },
+
             ready: function () {
                 showCampaigns();
                 getCampaigns(this).then(function (success) {
                     var output = [];
                     for (var v in success.value) {
-                        output.push(parseCampaign(v, success.value[v]));
+                        output.push(success.context.parseCampaign(v, success.value[v]));
                     }
-                    success.context.campaigns = output;
+                    success.context.campaigns = output.reverse();
                 })
             }
-        })
+        });
+
+        function editCampaign(id) {
+            id = id.startsWith('edit') ? id.substr(4, id.length) : id.substr(5, id.length);
+            getCampaign(id, this).then(function (success) {
+                var context = document.querySelector('campaign-module');
+                //var context = success.context;
+                context.title = success.value.title;
+                context.hashtag = success.value.hashtag;
+                context.target = success.value.target;
+                context.end = parseTimestamp(success.value.end);
+                console.log(success.value.end);
+                context.openDialog();
+            });
+        }
+        //        function openDialog() {
+        //            document.getElementById('add-campaign').open();
+        //        }
     </script>
 </dom-module>
