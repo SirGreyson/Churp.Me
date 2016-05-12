@@ -250,7 +250,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         ajax.url += '?a=b';
                         ajax.params = {'c': 'd'};
                         expect(ajax.requestUrl).to.be.equal('/responds_to_get_with_json?a=b&c=d')
-                    })
+                    });
 
                     test('encodes params properly', function () {
                         ajax.params = {'a b,c': 'd e f'};
@@ -519,7 +519,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     });
 
                     test('if `contentType` is json, the body is json encoded', function () {
-                        var requestObj = {foo: 'bar', baz: [1, 2, 3]}
+                        var requestObj = {foo: 'bar', baz: [1, 2, 3]};
                         ajax.body = requestObj;
                         ajax.contentType = 'application/json';
                         ajax.generateRequest();
@@ -555,7 +555,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         test('we encode a custom object', function () {
                             function Foo(bar) {
                                 this.bar = bar
-                            };
+                            }
                             var requestObj = new Foo('baz');
                             ajax.body = requestObj;
                             ajax.contentType = 'application/x-www-form-urlencoded';
@@ -564,11 +564,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                             expect(server.requests[0]).to.be.ok;
                             expect(server.requests[0].requestBody).to.be.equal('bar=baz');
                         });
-                    })
+                    });
 
                     suite('and `contentType` isn\'t set', function () {
                         test('we don\'t try to encode an ArrayBuffer', function () {
-                            var requestObj = new ArrayBuffer()
+                            var requestObj = new ArrayBuffer();
                             ajax.body = requestObj;
                             ajax.generateRequest();
 

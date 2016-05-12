@@ -39,21 +39,21 @@
                     return;
                 }
                 userExists(this.username, this).then(function (success) {
+                    document.getElementById('username').invalid = success.value;
                     if (success.value) {
                         success.context.errMessage = 'Error! There is already an account with that username!';
-                        document.getElementById('username').invalid = true;
                         document.getElementById('password').invalid = false;
                         document.getElementById('password').value = '';
                         document.getElementById('password2').invalid = false;
                         document.getElementById('password2').value = '';
+                        return;
                     }
-                    else if (this.password != this.password2) {
+                    if (success.context.password != success.context.password2) {
                         document.getElementById('password2').invalid = true;
+                        return;
                     }
-                    else {
-                        addUser(this.username, this.password);
-                        window.location = "http://magiccitycoders.sngular.team/churp/settings.html";
-                    }
+                    addUser(this.username, this.password);
+                    window.location = "http://magiccitycoders.sngular.team/churp/settings.html";
                 });
             }
         })

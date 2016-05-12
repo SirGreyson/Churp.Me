@@ -192,7 +192,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     assert.equal(f._customElements.length, 1);
 
                     var simpleElement = f._customElements[0];
-                    assert.isFalse(!!simpleElement.name)
+                    assert.isFalse(!!simpleElement.name);
 
                     // custom elements
                     assert.isFalse(f.validate());
@@ -214,7 +214,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                     var input = f.elements[0];
 
-                    assert.isFalse(!!input.name)
+                    assert.isFalse(!!input.name);
 
                     assert.isFalse(f.validate());
                     assert.isFalse(input.validity.valid);

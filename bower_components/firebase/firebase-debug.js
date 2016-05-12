@@ -1329,7 +1329,6 @@
                     break;
                 default:
                     throw Error("Unknown type: " + typeof object);
-                    ;
             }
         };
         goog.json.Serializer.charToJsonCharCache_ = {
@@ -4156,7 +4155,6 @@
                     break;
                 default:
                     throw new Error("errorPrefix called with argumentNumber > 4.  Need to update it?");
-                    ;
             }
             var error = fnName + " failed: ";
             error += argName + " argument ";
@@ -4217,7 +4215,6 @@
                 return this.rootNode_.toString();
             };
         }
-        ;
         goog.provide("fb.core.view.CompleteChildSource");
         fb.core.view.CompleteChildSource = function () {
         };
@@ -4600,7 +4597,6 @@
                 return "Operation(" + this.path + ": " + this.source.toString() + " overwrite: " + this.snap.toString() + ")";
             };
         }
-        ;
         goog.provide("fb.core.operation.ListenComplete");
         fb.core.operation.ListenComplete = function (source, path) {
             this.type = fb.core.OperationType.LISTEN_COMPLETE;
@@ -4619,7 +4615,6 @@
                 return "Operation(" + this.path + ": " + this.source.toString() + " listen_complete)";
             };
         }
-        ;
         goog.provide("fb.core.util.SortedMap");
         goog.require("goog.array");
         fb.Comparator;
@@ -6897,7 +6892,6 @@
                 return fb.util.json.stringify(this.getQueryObject());
             };
         }
-        ;
         goog.provide("fb.core.snap.IndexMap");
         goog.require("fb.core.snap.Index");
         goog.require("fb.core.util");
@@ -7136,7 +7130,6 @@
                 return fb.util.json.stringify(this.val(true));
             };
         }
-        ;
         goog.provide("fb.core.snap.ChildrenNode");
         goog.require("fb.core.snap.IndexMap");
         goog.require("fb.core.snap.LeafNode");
@@ -7432,7 +7425,6 @@
                 return fb.util.json.stringify(this.val(true));
             };
         }
-        ;
         goog.provide("fb.core.snap");
         goog.require("fb.core.snap.ChildrenNode");
         goog.require("fb.core.snap.IndexMap");
@@ -7784,7 +7776,6 @@
                 return "Operation(" + this.path + ": " + this.source.toString() + " merge: " + this.children.toString() + ")";
             };
         }
-        ;
         goog.provide("fb.core.ReadonlyRestClient");
         goog.require("fb.core.util");
         goog.require("fb.util");
@@ -7802,7 +7793,7 @@
                 var pathString = query.path.toString();
                 this.log_("Listen called for " + pathString + " " + query.queryIdentifier());
                 var listenId = fb.core.ReadonlyRestClient.getListenId_(query, tag);
-                var thisListen = new Object;
+                var thisListen = {};
                 this.listens_[listenId] = thisListen;
                 var queryStringParamaters = query.getQueryParams().toRestQueryStringParameters();
                 var self = this;
@@ -8408,7 +8399,6 @@
                 return fb.util.json.stringify(json);
             };
         }
-        ;
         goog.provide("fb.core.operation.AckUserWrite");
         goog.require("fb.core.util.ImmutableTree");
         fb.core.operation.AckUserWrite = function (path, affectedTree, revert) {
@@ -8437,7 +8427,6 @@
                 return "Operation(" + this.path + ": " + this.source.toString() + " ack write revert=" + this.revert + " affectedTree=" + this.affectedTree + ")";
             };
         }
-        ;
         goog.provide("fb.core.Operation");
         goog.require("fb.core.operation.AckUserWrite");
         goog.require("fb.core.operation.Merge");
@@ -8468,7 +8457,6 @@
                 return this.fromUser ? "user" : this.tagged ? "server(queryID=" + this.queryId + ")" : "server";
             };
         }
-        ;
         goog.provide("fb.core.CompoundWrite");
         goog.require("fb.core.snap.Node");
         goog.require("fb.core.util");
@@ -9111,18 +9099,13 @@
                 }
                 switch (eventType) {
                     case "value":
-                        ;
                     case "child_added":
-                        ;
                     case "child_removed":
-                        ;
                     case "child_changed":
-                        ;
                     case "child_moved":
                         break;
                     default:
                         throw new Error(fb.util.validation.errorPrefix(fnName, argumentNumber, optional) + 'must be a valid event type: "value", "child_added", "child_removed", ' + '"child_changed", or "child_moved".');
-                        ;
                 }
             },
             validateKey: function (fnName, argumentNumber, key, optional) {
@@ -9755,7 +9738,7 @@
                         cb(fb.login.Errors.get("USER_CANCELLED"));
                         cb = null;
                     }
-                    return;
+
                 }
             }, 500);
             var req = fb.util.json.stringify({"a": "request", "d": params});
@@ -10929,7 +10912,6 @@
                 jsonpCB(this.commandCB, this.onMessageCB);
             };
         }
-        ;
         goog.provide("fb.realtime.WebSocketConnection");
         goog.require("fb.constants");
         goog.require("fb.core.stats.StatsManager");
@@ -14314,8 +14296,7 @@
         if (NODE_CLIENT) {
             module["exports"] = Firebase;
         }
-        ;
-    }
+    };
     ns.wrapper(ns.goog, ns.fb);
 }({goog: {}, fb: {}}));
 
