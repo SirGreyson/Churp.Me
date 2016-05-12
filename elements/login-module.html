@@ -46,7 +46,7 @@
                 authorizeUser(this.username, this.password).then(function (success) {
                     document.getElementById('password').invalid = !success;
                     if (success) {
-                        window.location = "http://magiccitycoders.sngular.team/churp/settings.html";
+                        window.location = "/settings.html";
                     }
                 });
             }
