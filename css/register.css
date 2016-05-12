@@ -2,81 +2,68 @@
 ** FONT FAMILY IMPORTATION **
 **/
 @font-face {
-    font-family: Roboto-Thin;
-    src: url(../fonts/Roboto-Thin.ttf);
+  font-family: Roboto-Thin;
+  src: url(../fonts/Roboto-Thin.ttf);
 }
-
 @font-face {
-    font-family: Roboto-Light;
-    src: url(../fonts/Roboto-Light.ttf);
+  font-family: Roboto-Light;
+  src: url(../fonts/Roboto-Light.ttf);
 }
-
 @font-face {
-    font-family: Roboto-Medium;
-    src: url(../fonts/Roboto-Medium.ttf);
+  font-family: Roboto-Medium;
+  src: url(../fonts/Roboto-Medium.ttf);
 }
-
 @font-face {
-    font-family: Roboto-Regular;
-    src: url(../fonts/Roboto-Regular.ttf);
+  font-family: Roboto-Regular;
+  src: url(../fonts/Roboto-Regular.ttf);
 }
-
 @font-face {
-    font-family: Roboto-Bold;
-    src: url(../fonts/Roboto-Bold.ttf);
+  font-family: Roboto-Bold;
+  src: url(../fonts/Roboto-Bold.ttf);
 }
-
 /**
 ** COLOR VARIABLE IMPORTATION **
 **/
 body {
-    background-color: #cfd8dc;
+  background-color: whitesmoke;
 }
-
 .logo-container {
-    margin-top: 3em;
-    text-align: center;
+  text-align: center;
 }
-
 .logo-container img {
-    margin-bottom: -5em;
-    width: 100%;
-    max-width: 30em;
+  margin-bottom: -5em;
+  width: 100%;
+  max-width: 30em;
 }
-
 .logo-container h1 {
-    font-family: Roboto-Bold;
-    letter-spacing: .25em;
+  font-family: Roboto-Bold;
+  letter-spacing: .25em;
 }
-
 .register-container #register-form {
-    width: 25%;
-    min-width: 30em;
-    margin: auto;
-    padding: 2em;
-    font-family: Roboto-Light;
+  width: 25%;
+  min-width: 25em;
+  margin: auto;
+  padding: 2em;
+  padding-top: 0;
+  font-family: Roboto-Light;
 }
-
 .register-container #register-form paper-input {
-    letter-spacing: .25em;
+  letter-spacing: .25em;
 }
-
 .register-container #register-form #login {
-    letter-spacing: .5em;
-    font-family: Roboto-Medium;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 2.5em;
-    margin-left: 8em;
+  letter-spacing: .5em;
+  font-family: Roboto-Medium;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 2.5em;
 }
-
 .register-container #register-form #submit {
-    width: 10em;
-    background: #01579b;
-    color: white;
-    letter-spacing: .5em;
-    display: block;
-    font-family: Roboto-Medium;
-    float: right;
-    margin-top: 2em;
+  width: 10em;
+  background: #01579b;
+  color: white;
+  letter-spacing: .5em;
+  display: block;
+  font-family: Roboto-Medium;
+  float: right;
+  margin-top: 2em;
 }
