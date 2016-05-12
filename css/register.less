@@ -8,7 +8,7 @@ body {
 }
 
 .logo-container {
-  // margin-top: 3em;
+  margin-top: 10em;
   text-align: center;
 
   img {
@@ -29,8 +29,7 @@ body {
     width: 25%;
     min-width: 25em;
     margin: auto;
-    padding: 2em;
-    padding-top: 0;
+    padding: 0 2em 2em 2em;
     font-family: Roboto-Light;
 
     paper-input {
@@ -41,14 +40,14 @@ body {
       letter-spacing: .5em;
       font-family: Roboto-Medium;
       text-decoration: none;
-      // margin: 2.7em auto 0 12em;
+      margin: 2.5em auto 0 14em;
       display: inline-block;
-      margin-top: 2.5em;
       // margin-left: 8em;
     }
 
     #submit {
       display: block;
+      text-align: center;
       width: 10em;
       background: @dark-blue;
       color: white;
@@ -58,5 +57,15 @@ body {
       float: right;
       margin-top: 2em;
     }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .logo-container {
+    margin-top: -3em;
+  }
+
+  .register-container #login {
+    margin-left: 0 !important;
   }
 }
