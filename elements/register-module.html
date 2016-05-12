@@ -23,6 +23,8 @@
                          error-message="Error! Invalid password!"></paper-input>
             <paper-input required id="password2" label="confirm password" type="password" bind-value="{{password2}}"
                          error-message="Error! Passwords do not match!"></paper-input>
+            <paper-input required id="tel" label="phone number" type="tel" bind-value="{{tel}}"
+                         error-message=""></paper-input>
             <a id="login" href="http://magiccitycoders.sngular.team/churp">login</a>
             <paper-button id="submit" raised on-tap="submitForm">REGISTER</paper-button>
         </form>
@@ -52,7 +54,8 @@
                         document.getElementById('password2').invalid = true;
                         return;
                     }
-                    addUser(this.username, this.password);
+                    console.log(this.username.value)
+                    addUser(this.username.value, this.password.value, this.tel.value);
                     window.location = "/settings.html";
                 });
             }

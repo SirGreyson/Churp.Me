@@ -44,8 +44,8 @@ function authorizeUser(username, password) {
  * @param username - the new user's Twitter username
  * @param password - the new user's predefined password
  */
-function addUser(username, password) {
-    users.child(username).set({password: password}, function (error) {
+function addUser(username, password, tel) {
+    users.child(username).set({password: password, telephone: tel}, function (error) {
         if (error) {
             console.log("User could not be added.", error);
         } else {
