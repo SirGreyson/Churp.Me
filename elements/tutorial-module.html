@@ -6,12 +6,19 @@
 
     <style></style>
 
-    <template></template>
+    <template>
+        <paper-dialog id="tutorial-dialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation"
+                      with-backdrop></paper-dialog>
+    </template>
 
     <script>
 
         Polymer({
-            is: 'tutorial-module'
+            is: 'tutorial-module',
+
+            openDialog: function () {
+                document.getElementById('tutorial-dialog').open();
+            }
         })
 
     </script>
