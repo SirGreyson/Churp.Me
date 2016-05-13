@@ -68,3 +68,34 @@ body {
     margin-left: 0 !important;
   }
 }
+
+.tutorial-container {
+
+  height: auto;
+
+  #tutorial-dialog {
+    width: 75%;
+    height: 75%;
+  }
+
+  #info-fab {
+    position: absolute;
+    bottom: -23em;
+    right: 5em;
+  }
+
+  @media only screen and (max-width: 900px) {
+
+    padding-top: 8em;
+
+    #info-fab {
+      bottom: 50em;
+      right: 3em;
+    }
+
+    #tutorial-dialog {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

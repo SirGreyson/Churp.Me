@@ -6,16 +6,16 @@
 <dom-module id="tutorial-module">
 
     <style>
-        #tutorial-dialog {
-            width: 100vw;
-            height: 100vh;
+        paper-fab {
+            --paper-fab-background: #0277bd;
+            --paper-fab-keyboard-focus-background: var(--paper-light-blue-900);
         }
     </style>
 
     <template>
         <paper-dialog id="tutorial-dialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation"
                       with-backdrop></paper-dialog>
-        <paper-fab small icon="add" on-tap="openDialog"></paper-fab>
+        <paper-fab id="info-fab" icon="info-outline" on-tap="openDialog"></paper-fab>
     </template>
 
     <script>
@@ -24,7 +24,6 @@
             is: 'tutorial-module',
 
             openDialog: function () {
-                console.log("opening....");
                 document.getElementById('tutorial-dialog').open();
             }
         })
