@@ -20,7 +20,10 @@
 <dom-module id="tutorial-module">
 
     <style>
-
+        paper-fab {
+            --paper-fab-background: #0277bd;
+            --paper-fab-keyboard-focus-background: var(--paper-light-blue-900);
+        }
     </style>
 
     <template>
@@ -52,7 +55,7 @@
                     </neon-animated-pages>
                 </div>
             </paper-dialog>
-            <paper-fab  icon="info-outline" on-tap="openDialog"></paper-fab>
+            <paper-fab id="info-fab"  icon="info-outline" on-tap="openDialog"></paper-fab>
         </div>
     </template>
 
@@ -61,7 +64,6 @@
             is: 'tutorial-module',
 
             openDialog: function () {
-                console.log("opening....");
                 document.getElementById('tutorial-dialog').open();
             },
             _onNextClick: function () {

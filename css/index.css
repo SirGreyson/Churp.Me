@@ -95,3 +95,34 @@ body {
     margin-left: 0 !important;
   }
 }
+
+.tutorial-container {
+  height: auto;
+}
+
+.tutorial-container #tutorial-dialog {
+  width: 75%;
+  height: 75%;
+}
+
+.tutorial-container #info-fab {
+  position: absolute;
+  bottom: -23em;
+  right: 5em;
+}
+
+@media only screen and (max-width: 900px) {
+  .tutorial-container {
+    padding-top: 8em;
+  }
+
+  .tutorial-container #info-fab {
+    bottom: 50em;
+    right: 3em;
+  }
+
+  .tutorial-container #tutorial-dialog {
+    width: 100%;
+    height: 100%;
+  }
+}
