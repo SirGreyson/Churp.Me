@@ -71,12 +71,10 @@ body {
   float: right;
   margin-top: 2em;
 }
-
 @media only screen and (max-width: 900px) {
   .logo-container {
     margin-top: 0;
   }
-
   .login-container #register {
     margin-left: 0 !important;
   }
