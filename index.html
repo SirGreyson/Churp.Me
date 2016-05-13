@@ -13,6 +13,7 @@
         <script src="bower_components/firebase/firebase.js"></script>
         <link rel="import" href="elements/login-module.html">
         <link rel="import" href="elements/tutorial-module.html">
+        <link rel="import" href="bower_components/paper-fab/paper-fab.html">
     </head>
     <body>
         <div class="row">
@@ -33,9 +34,15 @@
                 <div class="col-sm-12">
                     <div class="tutorial-container">
                         <tutorial-module></tutorial-module>
+                        <paper-fab icon="add" onclick="openDialog()"></paper-fab>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            function openDialog() {
+                document.getElementById('tutorial-dialog').open();
+            }
+        </script>
     </body>
 </html>
