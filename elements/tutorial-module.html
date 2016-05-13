@@ -1,34 +1,76 @@
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animations.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/av-icons.html">
+<link rel="import" href="../bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animatable.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/av-icons.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
 
 
 <dom-module id="tutorial-module">
 
     <style>
-        #tutorial-dialog {
-            width: 100vw;
-            height: 100vh;
-        }
+
     </style>
 
     <template>
-        <paper-dialog id="tutorial-dialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation"
-                      with-backdrop></paper-dialog>
-        <paper-fab small icon="add" on-tap="openDialog"></paper-fab>
+        <div class="tut-dialog">
+            <paper-dialog id="tutorial-dialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
+                <div class="header">
+                    <h1 id="main">Welcome to Churp! <paper-icon-button id="next-button" icon="arrow-forward" on-click="_onNextClick"></paper-icon-button></h1>
+                </div> 
+                <div class="wrap">
+                    <neon-animated-pages selected="0" entry-animation="[[entryAnimation]]"exit-animation="[[exitAnimation]]">
+                        <neon-animatable>
+                            <h3>Churp is a new way of quickly sending money via twitter to friends, family, or charities.</h3>
+                        </neon-animatable>
+                        
+                        <neon-animatable>
+                            <h3>Registering with Churp is a breeze! Just login with twitter details.</h3>
+                        </neon-animatable>
+                        
+                        <neon-animatable>
+                            <h3>Once you are registered, link your paypal account.</h3>
+                        </neon-animatable>
+                        <neon-animatable>
+                            <h3>Verify you are following @churp_me on twitter! Important!</h3>
+                        </neon-animatable>
+                        <neon-animatable>
+                            <h3>To send a churp, simply begin a tweet with @churp_me, followed by the targeted user youd like to send money too, followed by the amount you'd like to send.</h3>
+                            <h4>@churp_me @targetaccount 5.00</h4>
+                        </neon-animatable>
+                    </neon-animated-pages>
+                </div>
+            </paper-dialog>
+            <paper-fab  icon="info-outline" on-tap="openDialog"></paper-fab>
+        </div>
     </template>
 
     <script>
-
         Polymer({
             is: 'tutorial-module',
 
             openDialog: function () {
                 console.log("opening....");
                 document.getElementById('tutorial-dialog').open();
+            },
+            _onNextClick: function () {
+                var pages = document.querySelector('neon-animated-pages');
+                this.entryAnimation = 'slide-from-right-animation';
+                this.exitAnimation = 'slide-left-animation';
+                pages.selectNext();
             }
         })
-
     </script>
 
 </dom-module>
