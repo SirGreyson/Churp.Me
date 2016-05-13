@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 
 
 <dom-module id="tutorial-module">
@@ -14,19 +15,19 @@
     <template>
         <paper-dialog id="tutorial-dialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation"
                       with-backdrop></paper-dialog>
+        <paper-fab small icon="add" on-tap="openDialog"></paper-fab>
     </template>
 
     <script>
 
         Polymer({
-            is: 'tutorial-module'
+            is: 'tutorial-module',
 
-        }),
-
-                function openDialog() {
-                    console.log("opening....");
-                    document.getElementById('tutorial-dialog').open();
-                }
+            openDialog: function () {
+                console.log("opening....");
+                document.getElementById('tutorial-dialog').open();
+            }
+        })
 
     </script>
 
