@@ -95,32 +95,85 @@ body {
     margin-left: 0 !important;
   }
 }
-
 .tutorial-container {
   height: auto;
 }
-
 .tutorial-container #tutorial-dialog {
   width: 75%;
   height: 75%;
 }
 
+.tutorial-container #tutorial-dialog #tutorial-header {
+  margin-top: 0;
+  height: 10em;
+}
+
+.tutorial-container #tutorial-dialog #tutorial-header .title {
+  font-size: 3em;
+  font-family: Roboto-Medium;
+  margin-top: 2em;
+  height: 1.2em;
+}
+
+.tutorial-container #tutorial-dialog #tutorial-header paper-fab {
+  margin: 5em 0 0 2em;
+}
+
+.tutorial-container #tutorial-dialog neon-animatable .logo-container {
+  width: 100%;
+}
+
+.tutorial-container #tutorial-dialog neon-animatable .logo-container img {
+  width: 20%;
+  margin: -5em auto 3em auto;
+}
+
+.tutorial-container #tutorial-dialog neon-animatable .image-container {
+  width: 100%;
+  text-align: center;
+}
+
+.tutorial-container #tutorial-dialog neon-animatable .image-container img {
+  width: 25%;
+  margin: 3em auto;
+}
+
+.tutorial-container #tutorial-dialog neon-animatable .image-container .large {
+  width: 35% !important;
+}
+
+.tutorial-container #tutorial-dialog neon-animatable .text-container {
+  width: 75%;
+  margin: auto;
+  text-align: center;
+  border-top: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+.tutorial-container #tutorial-dialog neon-animatable .text-container h3 {
+  font-family: Roboto-Medium;
+}
+
+.tutorial-container #tutorial-dialog neon-animatable .text-container .blue {
+  color: #039be5;
+}
+
+.tutorial-container #tutorial-dialog neon-animatable .text-container .green {
+  color: green;
+}
 .tutorial-container #info-fab {
   position: absolute;
   bottom: -23em;
   right: 5em;
 }
-
 @media only screen and (max-width: 900px) {
   .tutorial-container {
     padding-top: 8em;
   }
-
   .tutorial-container #info-fab {
     bottom: 50em;
     right: 3em;
   }
-
   .tutorial-container #tutorial-dialog {
     width: 100%;
     height: 100%;

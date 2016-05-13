@@ -101,6 +101,68 @@ body {
   #tutorial-dialog {
     width: 75%;
     height: 75%;
+
+    #tutorial-header {
+      margin-top: 0;
+      height: 10em;
+
+      .title {
+        font-size: 3em;
+        font-family: Roboto-Medium;
+        margin-top: 2em;
+        height: 1.2em;
+      }
+
+      paper-fab {
+        margin: 5em 0 0 2em;
+      }
+    }
+
+    neon-animatable {
+
+      .logo-container {
+        width: 100%;
+
+        img {
+          width: 20%;
+          margin: -5em auto 3em auto;
+        }
+      }
+
+      .image-container {
+        width: 100%;
+        text-align: center;
+
+        img {
+          width: 25%;
+          margin: 3em auto;
+        }
+
+        .large {
+          width: 35% !important;
+        }
+      }
+
+      .text-container {
+        width: 75%;
+        margin: auto;
+        text-align: center;
+        border-top: 2px solid gray;
+        border-bottom: 2px solid gray;
+
+        h3 {
+          font-family: Roboto-Medium;
+        }
+
+        .blue {
+          color: @light-blue;
+        }
+
+        .green {
+          color: green;
+        }
+      }
+    }
   }
 
   #info-fab {
